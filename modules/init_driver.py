@@ -7,15 +7,9 @@ from definitions import dirs
 
 def initialize_driver():
     logging.info("Init chrome driver...")
-    pdf_download_path = str(dirs["pdfs"])
-    logging.info(f"PDFs will be saved to: {pdf_download_path}")
+
+    # set up Chrome options
     chrome_options = Options()
-    chrome_options.add_experimental_option('prefs', {
-        "download.default_directory": pdf_download_path,  # Change default directory for downloads
-        "download.prompt_for_download": False,  # To auto download the file
-        "download.directory_upgrade": True,
-        "plugins.always_open_pdf_externally": True  # It will not show PDF directly in chrome
-    })
 
     # Headless or non-headless
     if os.environ.get("RUN_HEADLESS") == "TRUE":
@@ -25,6 +19,18 @@ def initialize_driver():
         )
     else:
         logging.info("Mode: GUI")
+
+    # PDF downloads
+    pdf_download_path = str(dirs["pdfs"])
+    logging.info(f"PDFs will be saved to: {pdf_download_path}")
+    chrome_options.add_experimental_option('prefs', {
+        "download.default_directory": pdf_download_path,  # Change default directory for downloads
+        "download.prompt_for_download": False,  # To auto download the file
+        "download.directory_upgrade": True,
+        "plugins.always_open_pdf_externally": True  # It will not show PDF directly in chrome
+    })
+
+
 
     # If CHROME_DRIVER_PATH is set in env variables then use that path, otherwise default to PATH locations
     chrome_driver_path = os.environ.get("CHROME_DRIVER_PATH")

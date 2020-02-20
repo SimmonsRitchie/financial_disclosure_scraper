@@ -3,11 +3,13 @@ from selenium.webdriver.chrome.options import Options
 import time
 import csv
 import sys
-from modules.init_driver import initialize_driver
 import logging
-from logs.config.logging import logs_config
-from definitions import paths
 from dotenv import load_dotenv
+
+from modules.init_driver import initialize_driver
+from modules.misc import delete_dir_contents
+from logs.config.logging import logs_config
+from definitions import paths, dirs
 
 def main():
 
@@ -17,12 +19,15 @@ def main():
     # init logging
     logs_config()
 
+    # clean up temp dirs
+    delete_dir_contents(dirs["scraped"])
+
     # init driver
     logging.info("Begin scrape")
     driver = initialize_driver()
 
     # set vars
-    start_id = 1
+    start_id = 3
     end_id =  5
 
     for pageId in range(start_id, end_id):
@@ -100,8 +105,6 @@ def main():
                     writer.writerow(data)
 
                 # Download PDF
-                logging.info(f"Downloading PDF")
-
                 toolbar = driver.find_element_by_id('imageToolbar')
 
                 btnList = toolbar.find_elements_by_tag_name('button')
@@ -110,7 +113,9 @@ def main():
 
                 printDiv = driver.find_element_by_id('dialogButtons')
                 printDiv.find_element_by_class_name('btn').click()
+                logging.info(f"Downloading PDF...")
                 time.sleep(5)
+                logging.info("Go to next page ID")
                 continue
 
             else:

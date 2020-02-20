@@ -4,3 +4,4 @@ logs/__pycache__/
 logs/config/__pycache__/
 logs/output/
 modules/__pycache__/
+scraped/
