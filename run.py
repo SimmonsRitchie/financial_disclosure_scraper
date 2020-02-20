@@ -5,7 +5,7 @@ from scraper.webdriver.init_driver import initialize_driver
 from scraper.helper.misc import delete_dir_contents
 from scraper.webdriver.page import scrape_page
 from logs.config.logging import logs_config
-from definitions import DIR_DATA, PATH_DATA_MASTERLIST
+from definitions import DIR_DATA
 
 
 def main():
@@ -16,8 +16,12 @@ def main():
     # init logging
     logs_config()
 
-    # clean up temp dirs
-    delete_dir_contents(DIR_DATA)
+    # create or clean temp dirs
+    if DIR_DATA.is_dir():
+        # delete files from previous run
+        delete_dir_contents(DIR_DATA)
+    else:
+        DIR_DATA.mkdir()
 
     # init driver
     logging.info("Begin scrape")
