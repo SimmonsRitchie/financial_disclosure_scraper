@@ -10,15 +10,12 @@ import os
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))  # This is your Project Root
 root_dir = Path(ROOT_DIR)
 
-temp_dir = root_dir / "temp/"
-static_dir = root_dir / "static/"
-test_dir = root_dir / "tests/"
-
 # DIRECTORIES
 dirs = {
     "logs": root_dir / "logs",  # main dir for log-related files
     "logs_output": root_dir / "logs/output",  # logging subdir for generated logs
-    "scraped": root_dir / "scraped"
+    "scraped": root_dir / "scraped",
+    "pdfs": root_dir / "scraped/pdfs/"
 }
 
 # PATHS
