@@ -4,24 +4,48 @@ import time
 import csv
 import sys
 from modules.init_driver import initialize_driver
+import logging
+from logs.config.logging import logs_config
+from definitions import paths
+from dotenv import load_dotenv
 
 def main():
 
+    # load environ vars
+    load_dotenv()
+
+    # init logging
+    logs_config()
+
+    # init driver
+    logging.info("Begin scrape")
     driver = initialize_driver()
 
-    for pageId in range(int(sys.argv[1]), int(sys.argv[2])):
+    # set vars
+    start_id = 1
+    end_id =  5
+
+    for pageId in range(start_id, end_id):
+        logging.info(f"Scraping page id: {pageId}")
 
         url = "https://www.ethicsrulings.pa.gov/WebLink/DocView.aspx?id=" + str(pageId) + "&dbid=0&repo=EthicsLF8"
         driver.get(url)
         time.sleep(3)
 
+        # Check whether SFI is found
         try:
             errorMsg = driver.find_element_by_id('ErrorMsg')  # if page access is denied
+            logging.info("Page loaded with an error message")
+            logging.info(f"Message: {errorMsg.text}")
         except Exception:
+            logging.info("Page loaded without error message")
 
             try:
                 imageCanvas = driver.find_element_by_id('imageCanvas')  # if page has any form content
+                logging.info("#imageCanvas element found")
+
             except Exception:
+                logging.info("No #imageCanvas element found, go to next page ID...")
                 continue
 
             breadcrumbDiv = driver.find_element_by_class_name('breadcrumbEntry')
@@ -31,9 +55,13 @@ def main():
             folderListItem = breadcrumbListItems[1]
             folderName = folderListItem.find_element_by_tag_name('a')
 
-            if folderName.text == 'Statement Of Financial Interest':  # if page displays Financial Interest files
+            target_folder_name = 'Statement Of Financial Interest'
+
+            if folderName.text == target_folder_name:  # if page displays Financial Interest files
+                logging.info(f"Folder name contains: {target_folder_name}")
 
                 # Scrape Metadata table
+                logging.info(f"Scraping metadata table")
                 table = driver.find_element_by_id('metadataTable')
                 tbody = table.find_element_by_tag_name('tbody')
                 trList = tbody.find_elements_by_tag_name('tr')
@@ -64,12 +92,16 @@ def main():
 
                 data.append(pageId)  # unique ID for filing
 
-                with open('/Users/deborahwalker/Desktop/FinancialDisclosureMasterlist' + sys.argv[3] + '.csv', 'a',
+                master_list_path = paths["master_list"]
+
+                with open(master_list_path, 'a',
                           newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow(data)
 
                 # Download PDF
+                logging.info(f"Downloading PDF")
+
                 toolbar = driver.find_element_by_id('imageToolbar')
 
                 btnList = toolbar.find_elements_by_tag_name('button')
@@ -82,6 +114,8 @@ def main():
                 continue
 
             else:
+                logging.info(f"Folder name doesn't contain: {target_folder_name}")
+                logging.info(f"Go to next page ID")
                 continue
 
         continue

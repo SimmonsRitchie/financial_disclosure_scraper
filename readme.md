@@ -19,3 +19,7 @@ Third arg: int to append to the csv file name
 Eg.
 
 ```python main.py 1 30000 1```
+
+Or with pipenv:
+
+```pipenv run python main.py 1 30000 1```
