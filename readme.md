@@ -1,4 +1,4 @@
-## SFI Scraper
+## Financial Disclosure Scraper
 
 Python script to download PDFs of statements of financial interest from Ethics Commission website.
 
