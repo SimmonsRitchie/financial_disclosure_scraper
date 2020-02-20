@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from modules.init_driver import initialize_driver
 from modules.misc import delete_dir_contents
 from logs.config.logging import logs_config
-from definitions import DIR_DATA, PATH_MASTER_LIST
+from definitions import DIR_DATA, PATH_DATA_MASTERLIST
 
 def main():
 
@@ -97,7 +97,7 @@ def main():
 
                 data.append(pageId)  # unique ID for filing
 
-                with open(PATH_MASTER_LIST, 'a',
+                with open(PATH_DATA_MASTERLIST, 'a',
                           newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow(data)

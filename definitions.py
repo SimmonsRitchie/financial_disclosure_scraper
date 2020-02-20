@@ -18,4 +18,4 @@ DIR_DATA_PDFS = DIR_DATA / "pdfs"
 # PATHS
 PATH_LOGS_CONFIG = DIR_LOGS_CONFIG / "logging.yaml"
 PATH_LOGS_CONFIG_TEST = DIR_LOGS_CONFIG / "logging_test.yaml"
-PATH_MASTER_LIST = DIR_DATA / "FinancialDisclosureMasterList.csv"
+PATH_DATA_MASTERLIST = DIR_DATA / "FinancialDisclosureMasterList.csv"
