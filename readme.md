@@ -40,11 +40,11 @@ dependencies. Run:
 
 From the terminal, make sure you're in the project directory. Run the following:
 
-```python scraper/runner.py```
+```python runner.py```
 
 Or:
 
-```pipenv run python scraper/runner.py```
+```pipenv run python runner.py```
 
 #### Contributors
 

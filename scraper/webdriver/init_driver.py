@@ -6,6 +6,9 @@ import logging
 from definitions import DIR_DATA_PDFS
 
 def initialize_driver():
+
+    """ Initializes Chrome Driver and options. """
+
     logging.info("Init chrome driver...")
 
     # set up Chrome options
