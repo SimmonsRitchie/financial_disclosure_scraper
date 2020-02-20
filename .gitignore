@@ -3,5 +3,5 @@ __pycache__/
 logs/__pycache__/
 logs/config/__pycache__/
 logs/output/
-modules/__pycache__/
+scraper/__pycache__/
 data/

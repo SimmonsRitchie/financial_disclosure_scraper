@@ -37,19 +37,14 @@ dependencies. Run:
 
 
 #### Run
-Usage from command line:
-
-First arg: start page ID (starting at 1)
-Second arg: end page ID (should be safe to end at 340000)
-Third arg: int to append to the csv file name
 
 From the terminal, make sure you're in the project directory. Run the following:
 
-```python main.py```
+```python scraper/runner.py```
 
 Or:
 
-```pipenv run python main.py```
+```pipenv run python scraper/runner.py```
 
 #### Contributors
 

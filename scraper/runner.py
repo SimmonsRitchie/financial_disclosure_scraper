@@ -1,13 +1,10 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import time
 import csv
-import sys
 import logging
 from dotenv import load_dotenv
 
-from modules.init_driver import initialize_driver
-from modules.misc import delete_dir_contents
+from scraper.webdriver.init_driver import initialize_driver
+from scraper.helper.misc import delete_dir_contents
 from logs.config.logging import logs_config
 from definitions import DIR_DATA, PATH_DATA_MASTERLIST
 
