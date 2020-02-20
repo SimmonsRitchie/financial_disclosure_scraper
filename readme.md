@@ -6,8 +6,8 @@ Python script to download PDFs of statements of financial interest from Ethics C
 
 - Python 3.7+
 - Chrome installed and located in your applications folder.
-- Chromedriver. Here's a guide for installing on Mac (pretty easy) and here's a guide for installing on Ubuntu 16.04
- or 18.04 (a little trickier but not too bad).
+- Chromedriver. Here's a guide for [installing on Mac](http://jonathansoma.com/lede/foundations-2017/classes/more-scraping/selenium/) (pretty easy) and 
+here's a guide for [installing on Ubuntu 16.04 or 18.04](https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/) (a little trickier but not too bad).
 
 #### Install
 
