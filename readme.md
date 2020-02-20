@@ -40,11 +40,11 @@ dependencies. Run:
 
 From the terminal, make sure you're in the project directory. Run the following:
 
-```python runner.py```
+```python run.py```
 
 Or:
 
-```pipenv run python runner.py```
+```pipenv run python run.py```
 
 #### Contributors
 
