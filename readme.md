@@ -11,27 +11,30 @@ Python script to download PDFs of statements of financial interest from Ethics C
 
 #### Install
 
-1. Open the terminal. Clone this repo:
+1. Open the terminal. Clone the project repo:
 
     `git clone https://github.com/SimmonsRitchie/financial_disclosure_scraper.git`
 
-2. If you don't have pipenv installed, run:
+2. If you don't have pipenv installed on your machine, run:
 
     `pip install pipenv`
 
 3. Navigate into the project directory:
 
-    `cd court_docket_scraper`
+    `cd financial_disclosure_scraper`
      
 4. Use pipenv to create a virtual environment and install the project 
 dependencies. Run:
 
     `pipenv install`
 
-5. If needed, configure the environmental variables in .env in the root of the project directory. Refer to the
- comments for what each variable does. If you're not sure, leave the file as it is.:
+5. If needed, configure the environmental variables in .env in the root of the project directory:
+     
+     `nano .env`
+ 
+ Refer to the comments for what each variable does.
 
-    `nano .env`
+
 
 #### Run
 Usage from command line:
