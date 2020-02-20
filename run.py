@@ -69,7 +69,7 @@ def main():
         > loop over each row on page:
             > scrape page
     
-    /// psuedo code ///
+    /// pseudo code ///
         
     driver open "https://www.ethicsrulings.pa.gov/WebLink/Search.aspx?dbid=0&repo=EthicsLF8"
     
