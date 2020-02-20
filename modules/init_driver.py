@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from pathlib import Path
 import os
 import logging
-from definitions import dirs
+from definitions import DIR_DATA_PDFS
 
 def initialize_driver():
     logging.info("Init chrome driver...")
@@ -21,7 +21,7 @@ def initialize_driver():
         logging.info("Mode: GUI")
 
     # PDF downloads
-    pdf_download_path = str(dirs["pdfs"])
+    pdf_download_path = str(DIR_DATA_PDFS)
     logging.info(f"PDFs will be saved to: {pdf_download_path}")
     chrome_options.add_experimental_option('prefs', {
         "download.default_directory": pdf_download_path,  # Change default directory for downloads

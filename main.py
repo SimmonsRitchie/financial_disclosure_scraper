@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from modules.init_driver import initialize_driver
 from modules.misc import delete_dir_contents
 from logs.config.logging import logs_config
-from definitions import paths, dirs
+from definitions import DIR_DATA, PATH_MASTER_LIST
 
 def main():
 
@@ -20,7 +20,7 @@ def main():
     logs_config()
 
     # clean up temp dirs
-    delete_dir_contents(dirs["scraped"])
+    delete_dir_contents(DIR_DATA)
 
     # init driver
     logging.info("Begin scrape")
@@ -97,9 +97,7 @@ def main():
 
                 data.append(pageId)  # unique ID for filing
 
-                master_list_path = paths["master_list"]
-
-                with open(master_list_path, 'a',
+                with open(PATH_MASTER_LIST, 'a',
                           newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow(data)

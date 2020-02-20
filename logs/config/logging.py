@@ -3,21 +3,27 @@ import logging.config
 import os
 import pathlib
 import yaml
-from definitions import dirs, paths
+from definitions import DIR_LOGS_OUTPUT, PATH_LOGS_CONFIG
 
 
 def logs_config(
-    default_path=paths["logs_config"], default_level=logging.INFO, env_key="LOG_CFG"
+    default_path=PATH_LOGS_CONFIG, default_level=logging.INFO, env_key="LOG_CFG"
 ):
+    """
+    Setup logging configuration
+    @default_path: path of logging config file, eg. config/logging.yaml
+    @default_level: default level that logs are logged at.
+    @env_key: If env_key is detected among env variables, this will be used as path to config file
+    """
 
-    # set log output directory
-    log_output = dirs["logs_output"]
-
-    """Setup logging configuration"""
     path = default_path
-    value = os.getenv(env_key, None)  # if file path is set using LOG_CFG env, use this
+
+    # if file path is set using LOG_CFG env as path to config file
+    value = os.getenv(env_key, None)
     if value:
         path = value
+
+    # load config
     if os.path.exists(path):
         with open(path, "rt") as f:
             config = yaml.safe_load(f.read())  # convert yaml to dict
@@ -25,7 +31,7 @@ def logs_config(
             for handler in config["handlers"]:
                 if "FileHandler" in config["handlers"][handler]["class"]:
                     config["handlers"][handler]["filename"] = (
-                        log_output / config["handlers"][handler]["filename"]
+                        DIR_LOGS_OUTPUT / config["handlers"][handler]["filename"]
                     )
                     config["handlers"][handler]["filename"].parent.mkdir(
                         exist_ok=True, parents=True
